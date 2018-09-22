@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 const app = express();
 
 // connect to mongoDB
-mongoose.connect('mongodb://localhost/vitoUsergo');
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds263832.mlab.com:63832/heroku_d7j8xzvr');
 mongoose.Promise = global.Promise;
 
 
