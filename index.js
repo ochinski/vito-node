@@ -21,7 +21,9 @@ app.use(express.json());
 
 // initalize routes
 app.use('/api', admin);
-
+app.get ('/', function (req, res) {
+    res.send('Hello World!');
+})
 // error handing middleware
 app.use(function(err, req, res, next) {
     res.send({error: err.message})
