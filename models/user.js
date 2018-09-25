@@ -12,7 +12,6 @@ const userSchema = new Schema({
     pin : {
         type : Number
     }
-    // add in geo location?
 });
 
 const User = mongoose.model('user',userSchema);
