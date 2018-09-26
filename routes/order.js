@@ -3,13 +3,22 @@ const router = express.Router();
 const Order = require('../models/order');
 
 /* GET all orders  */
-router.get('/orders/:name/:limit/:skip', function(req, res) {
+router.get('/orders/:name/:limit/:skip', function(req, res, next) {
     var parsSkip = parseInt(req.params.skip);
     var parsLimit = parseInt(req.params.limit);
-    Order.find({name:req.params.name}).limit(parsLimit).skip(parsSkip).then (function (orders) { 
+    Order.find({name:req.params.name}).limit(parsLimit).skip(parsSkip).then (function (order) { 
         console.log('GET / ', req.params);
-        res.send(orders);
-    })
+        res.send(order);
+    }).catch (next)
+});
+
+/* GET single MAIN order */
+router.get('/orders/:date', function (req, res, next) {
+    // var parseDate = String(req.params.date)
+    Order.find({date:req.params.date}).then (function (order) {
+        console.log ('GET ORDER with /', req.params.date);
+        res.send(order);
+    }).catch (next)
 });
 
 /* POST new orders */

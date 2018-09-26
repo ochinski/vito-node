@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 // define order schema
 const orderScheme = new Schema({
     name : { type : String },
+    date : { type : String },
     orders : { type : Array}
 });
 

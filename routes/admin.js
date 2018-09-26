@@ -5,9 +5,20 @@ const User = require('../models/user');
 // const AcountsDB = require('../fakedb/Accounts');
 
 /* GET all users  */
-router.get('/users', function(req, res) {
+router.get('/users', function(req, res, next) {
     User.find({}).then (function (users) {
         res.send(users);
+    }).catch (next)
+});
+
+/* DELETE specific USER */
+router.delete('/users/:name' , function (req, res) {
+    User.deleteOne({name: req.params.name})
+    .exec()
+    .catch (err => res.status(500).send(err) )
+    .then (function () {
+        console.log('DELETED / ', req.params.name);
+        // res.send('DELETED / ',req.params.name);
     })
 });
 
