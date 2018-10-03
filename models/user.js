@@ -5,13 +5,8 @@ const Schema = mongoose.Schema;
 
 // define user schema
 const userSchema = new Schema({
-    name : {
-        type : String,
-        required: [true, 'Name field is required']
-    },
-    pin : {
-        type : Number
-    }
+    name : { type : String },
+    pin : { type : Number }
 });
 
 const User = mongoose.model('user',userSchema);

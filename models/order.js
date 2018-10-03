@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 const orderScheme = new Schema({
     name : { type : String },
     date : { type : String },
+    customer : { type : Array },
     orders : { type : Array}
 });
 

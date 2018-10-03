@@ -14,8 +14,14 @@ router.get('/orders/:name/:limit/:skip', function(req, res, next) {
 
 /* GET single MAIN order */
 router.get('/orders/:date', function (req, res, next) {
-    // var parseDate = String(req.params.date)
     Order.find({date:req.params.date}).then (function (order) {
+        console.log ('GET ORDER with /', req.params.date);
+        res.send(order);
+    }).catch (next)
+});
+
+router.get('/orders/:date/:isTime', function (req,res,next) {
+    Order.find({orders: { date:req.params.date}}).then (function (order) {
         console.log ('GET ORDER with /', req.params.date);
         res.send(order);
     }).catch (next)

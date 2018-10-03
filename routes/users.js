@@ -18,11 +18,10 @@ router.delete('/users/:name' , function (req, res) {
     .catch (err => res.status(500).send(err) )
     .then (function () {
         console.log('DELETED / ', req.params.name);
-        // res.send('DELETED / ',req.params.name);
     })
 });
 
-/* POT new users */
+/* POST new users */
 router.post ('/users',function(req,res, next) {
     User.create(req.body).then(function (user) {
         res.send (user);

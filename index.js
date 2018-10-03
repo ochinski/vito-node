@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 // add routes
-const admin = require('./routes/admin');
-const order = require('./routes/order');
+const users = require('./routes/users');
+const orders = require('./routes/orders');
+const customers = require('./routes/customers');
 
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -22,8 +23,9 @@ app.use(bodyParser.json());
 app.use(express.json());      
 
 // initalize routes
-app.use('/api',admin);
-app.use('/api',order);
+app.use('/api',users);
+app.use('/api',orders);
+app.use('/api',customers);
 
 // error handing middleware
 app.use(function(err, req, res, next) {
