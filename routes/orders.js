@@ -20,6 +20,14 @@ router.get('/orders/:date', function (req, res, next) {
     }).catch (next)
 });
 
+/* GET all customer order's */
+router.get('/orders/:name/:phone', function (req, res, next) {
+    Order.find({customerName:req.params.name, customerPhone:req.params.phone}).then (function (order) {
+        console.log ('GET ORDER with /', req.params.name, ' and ', req.params.phone);
+        res.send(order);
+    }).catch (next)
+});
+
 router.get('/orders/:date/:isTime', function (req,res,next) {
     Order.find({orders: { date:req.params.date}}).then (function (order) {
         console.log ('GET ORDER with /', req.params.date);
