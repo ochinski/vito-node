@@ -11,6 +11,10 @@ var bodyParser = require('body-parser');
 
 // declare express app
 const app = express();
+const PORT = 8080;
+
+
+// app.listen(9000);
 
 // connect to mongoDB and check for special req
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/vitoUsergo'
@@ -21,15 +25,21 @@ app.use(bodyParser.json());
 
 
 app.use(express.json());      
+app.use(express.static(path.join(__dirname, 'build')));
 
 // initalize routes
 app.use('/api',users);
 app.use('/api',orders);
 app.use('/api',customers);
 
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+
 // error handing middleware
 app.use(function(err, req, res, next) {
     res.send({error: err.message})
 });
 
-app.listen(8080, () => console.log('Listening on port 8080!'));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
