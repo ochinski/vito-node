@@ -6,7 +6,7 @@ const users = require('./routes/users');
 const orders = require('./routes/orders');
 const customers = require('./routes/customers');
 
-var path = require('path');
+const path = require('path');
 var bodyParser = require('body-parser');
 
 // declare express app
@@ -32,10 +32,14 @@ app.use('/api',users);
 app.use('/api',orders);
 app.use('/api',customers);
 
-
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
+
+// app.get('/', function(req, res) {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//   });
 
 // error handing middleware
 app.use(function(err, req, res, next) {
