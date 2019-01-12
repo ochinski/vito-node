@@ -1,0 +1,99 @@
+Test
+2019-01-11
+Robert
+5195700555
+2019-01-11:11:58:06
+,Order : Split Pizza
+,Quantity : 1
+,Extra : na
+,Details : na
+,Size : medium
+,Crust : normal
+,Meat Toppings: 
+,Veggie Toppings: 
+,Cheese Toppings: Normal
+,Sauce Toppings: House
+,LEFT Meat Toppings: Pepperoni
+,LEFT Veggie Toppings: *Prosciutto
+,LEFT Cheese Toppings: 
+,LEFT Sauce Toppings: 
+,RIGHT Meat Toppings: Normal
+,RIGHT Veggie Toppings: Normal
+,RIGHT Cheese Toppings: House
+,RIGHT Sauce Toppings: House
+,2019-01-11:11:58:10
+,Order : Sub
+,Quantity : 1
+,Extra : na
+,Details : na
+,Size : medium
+,Crust : normal
+,Meat Toppings: Pepperoni,Ground Beef,Salami
+,Veggie Toppings: 
+,Cheese Toppings: Normal
+,Sauce Toppings: House
+,LEFT Meat Toppings: 
+,LEFT Veggie Toppings: 
+,LEFT Cheese Toppings: 
+,LEFT Sauce Toppings: 
+,RIGHT Meat Toppings: Normal
+,RIGHT Veggie Toppings: Normal
+,RIGHT Cheese Toppings: House
+,RIGHT Sauce Toppings: House
+,2019-01-11:12:16:59
+,Order : na
+,Quantity : 1
+,Extra : Bottle
+,Details : Root Beer
+,Size : medium
+,Crust : normal
+,Meat Toppings: 
+,Veggie Toppings: 
+,Cheese Toppings: Normal
+,Sauce Toppings: House
+,LEFT Meat Toppings: 
+,LEFT Veggie Toppings: 
+,LEFT Cheese Toppings: 
+,LEFT Sauce Toppings: 
+,RIGHT Meat Toppings: Normal
+,RIGHT Veggie Toppings: 
+,RIGHT Cheese Toppings: House
+,RIGHT Sauce Toppings: 
+,2019-01-11:12:18:48
+,Order : Side
+,Quantity : 1
+,Extra : 1 Pound
+,Details : Hot
+,Size : medium
+,Crust : normal
+,Meat Toppings: 
+,Veggie Toppings: 
+,Cheese Toppings: Normal
+,Sauce Toppings: House
+,LEFT Meat Toppings: 
+,LEFT Veggie Toppings: 
+,LEFT Cheese Toppings: 
+,LEFT Sauce Toppings: 
+,RIGHT Meat Toppings: Normal
+,RIGHT Veggie Toppings: 
+,RIGHT Cheese Toppings: House
+,RIGHT Sauce Toppings: 
+,2019-01-11:12:25:50
+,Order : Split Pizza
+,Quantity : 1
+,Extra : na
+,Details : na
+,Size : large
+,Crust : normal
+,Meat Toppings: 
+,Veggie Toppings: 
+,Cheese Toppings: Normal
+,Sauce Toppings: House
+,LEFT Meat Toppings: Pepperoni,Ham,*Chicken
+,LEFT Veggie Toppings: Italian Sausage,*Prosciutto,Ham
+,LEFT Cheese Toppings: 
+,LEFT Sauce Toppings: 
+,RIGHT Meat Toppings: Normal
+,RIGHT Veggie Toppings: Normal
+,RIGHT Cheese Toppings: House
+,RIGHT Sauce Toppings: House

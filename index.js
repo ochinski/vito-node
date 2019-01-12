@@ -1,40 +1,48 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+var fs = require('fs');
+var url = require('url');
+
 // add routes
 const users = require('./routes/users');
 const orders = require('./routes/orders');
 const customers = require('./routes/customers');
 
 const path = require('path');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 // declare express app
 const app = express();
 const PORT = 8080;
 
-
-// app.listen(9000);
-
 // connect to mongoDB and check for special req
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/vitoUsergo'
-mongoose.connect(mongoUri);
+// var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/vitoUsergo'
+// mongoose.connect(mongoUri);
+// mongoose.Promise = global.Promise;
+
+const db = 'mongodb://localhost/vitoUsergo';
+var isConnected = true;
 mongoose.Promise = global.Promise;
+mongoose.connect(db, function(err) {
+    if(err) {
+        isConnected = false;
+        console.log('Connection error');
+    }
+});
 
 app.use(bodyParser.json());
-
-
 app.use(express.json());      
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 // initalize routes
 app.use('/api',users);
 app.use('/api',orders);
 app.use('/api',customers);
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+// app.get('/', function(req, res) {
+//     res.sendFile(path.join(__dirname, '../build/index.html'));
+// });
 
 
 // app.get('/', function(req, res) {

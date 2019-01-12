@@ -8,7 +8,10 @@ const User = require('../models/user');
 router.get('/users', function(req, res, next) {
     User.find({}).then (function (users) {
         res.send(users);
-    }).catch (next)
+    })
+    .catch(function(error){
+        console.log('Error getting the posts');
+    });
 });
 
 /* DELETE specific USER */
