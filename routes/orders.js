@@ -4,11 +4,15 @@ const Order = require('../models/order');
 const spawn = require('child_process').spawn;
 const fs = require('fs');
 
+const parseObject = require('./scripts/parseObject');
+
 const bodyParser = require('body-parser');
 // express.use(bodyParser.urlencoded({ extended: false }));
 
 const path = require('path');
 const scriptFilename = path.join(__dirname, 'scripts', 'test.py');
+
+const parse = require("./scripts/parseObject.js");
 
 /* GET all orders  */
 router.get('/orders/:name/:skip', function(req, res, next) {
@@ -62,20 +66,7 @@ router.get('/orders/:date/:isTime', function (req,res,next) {
 });
 
 router.post ('/orders/printer',function(req,res, next) {
-    console.log('Printer , ',req.body);
-    var name = req.body.name;
-    var date = req.body.date;
-    var tagDate = req.body.tagDate;
-    var custName = req.body.customerName;
-    var custPhone = req.body.customerPhone;
-    var order = req.body.order;
-    var sauceRight = req.body.sauceRight;
-    fs.writeFile('./public/'+ name + '_' + tagDate + '.txt',
-    name + '\n' + date + '\n' + custName + '\n' + custPhone + '\n' + order,
-    function (err) {
-        if (err) throw err;
-        console.log('File is created successfully.');
-    }); 
+    parse.parseObject(req.body);
 });
 
 

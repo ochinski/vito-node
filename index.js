@@ -16,10 +16,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 8080;
 
-// connect to mongoDB and check for special req
-// var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/vitoUsergo'
-// mongoose.connect(mongoUri);
-// mongoose.Promise = global.Promise;
 
 const db = 'mongodb://localhost/vitoUsergo';
 var isConnected = true;
@@ -33,7 +29,7 @@ mongoose.connect(db, function(err) {
 
 app.use(bodyParser.json());
 app.use(express.json());      
-// app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 // initalize routes
 app.use('/api',users);
@@ -45,9 +41,9 @@ app.use('/api',customers);
 // });
 
 
-// app.get('/', function(req, res) {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-//   });
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 // error handing middleware
 app.use(function(err, req, res, next) {
