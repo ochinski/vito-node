@@ -4,8 +4,7 @@ const spawn = require('child_process').spawn;
 const fs = require('fs');
 
 function parseObject ( data ){
-    console.log('we been called');
-    // console.log('data been ' , data);
+    var driver = data.driver;
     var name = data.name;
     var date = data.date;
     var tagDate = data.tagDate;
@@ -13,7 +12,6 @@ function parseObject ( data ){
     var custPhone = data.customerPhone;
     var order = data.order;
     var cleanOrder = [];
-    console.log('raw data', order);
     cleanOrder.push (
         name
     )
@@ -27,22 +25,25 @@ function parseObject ( data ){
         '\n'
     )
     cleanOrder.push (
-        custName
+        'Customer Name: ' + custName
     )
     cleanOrder.push (
         '\n'
     )
     cleanOrder.push (
-        custPhone
+        'Customer Phone: ' + custPhone
+    )
+    cleanOrder.push (
+        '\n'
+    )
+    cleanOrder.push (
+        'Driver : ' + driver
     )
     cleanOrder.push (
         '\n'
     )
     for (let i = 0; i < order.length; i++) {
         if (order[i].includes('-')) {
-            // cleanOrder.push (
-            //     'time: ' + order[i] + '\n'
-            // )
             i++
         }
         if (order[i].includes('Slice')){
