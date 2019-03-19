@@ -13,6 +13,7 @@ const scriptFilename = path.join(__dirname, 'scripts', 'test.py');
 
 const parse = require("./scripts/parseObject.js");
 
+const mongoose = require('mongoose');
 
 /* GET Order with within days range */
 router.get('/orders/:end/:days/:year/:month/:day', function(req, res, next) { 
@@ -59,7 +60,7 @@ router.get('/orders/:end/:days/:year/:month/:day', function(req, res, next) {
 router.get('/orders/:name/:skip/', function(req, res, next) {
     var parsSkip = parseInt(req.params.skip);
     var parsLimit = parseInt(req.params.limit);
-    Order.find({name:req.params.name}).limit(10).skip(parsSkip).then (function (order) { 
+    Order.find({name:req.params.name}).limit().sort({$natural:-1}).skip(parsSkip).then (function (order) { 
         console.log('GET / ', req.params);
         res.send(order);
     }).catch (next)
@@ -72,6 +73,58 @@ router.get('/orders/:date', function (req, res, next) {
         res.send(order);
     }).catch (next)
 });
+
+/* GET all order with DRIVER's req */
+router.get('/orders_drivers', function (req, res, next) {
+    Order.find({driverReq : true}).limit().sort({$natural:-1}).skip().then (function (order) { 
+        console.log('GET drivers Added FALSE / ', req.params);
+        res.send(order);
+    }).catch (next)
+});
+
+/* post new Driver */
+router.post('/orders_drivers', function (req, res, next) {
+    console.log(req.body);
+    Order.update({
+        _id: mongoose.Types.ObjectId(req.body.id)
+        },
+        {
+        $set: {
+            driver:req.body.driver, driverReq:false
+        }
+        }, 
+        { new: true }, // If you want to return updated order
+        function (err, updatedOrder) { 
+        if (err) throw err;
+        console.log('UPDATE new driver', updatedOrder);
+    })
+}); 
+
+/* get non printed Drivers */
+router.get('/orders_drivers/print', function (req, res, next) {
+    Order.find({isPrinted : false}).limit().sort({$natural:-1}).skip().then (function (order) { 
+        console.log('GET drivers Added FALSE / ', req.params);
+        res.send(order);
+    }).catch (next)
+});
+
+/* updated printed Driver */
+router.post('/orders_drivers/print', function (req, res, next) {
+    console.log(req.body);
+    Order.update({
+        _id: mongoose.Types.ObjectId(req.body.id)
+        },
+        {
+        $set: {
+            isPrinted:true,
+        }
+        }, 
+        { new: true }, // If you want to return updated order
+        function (err, updatedOrder) { 
+        if (err) throw err;
+        console.log('UPDATE new driver', updatedOrder);
+    })
+}); 
 
 /* GET all customer order's */
 router.get('/orders/:name/:phone/:page', function (req, res, next) {

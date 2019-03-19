@@ -4,14 +4,23 @@ const spawn = require('child_process').spawn;
 const fs = require('fs');
 
 function parseObject ( data ){
+    console.log(data);
+    console.log('creating print order');
     var driver = data.driver;
     var name = data.name;
     var date = data.date;
+    var dateWT = data.dateWT;
     var tagDate = data.tagDate;
     var custName = data.customerName;
     var custPhone = data.customerPhone;
+    var custStreet = data.customerStreet;
+    var custCity = data.customerCity;
     var order = data.order;
     var cleanOrder = [];
+    var total = data.total;
+    var taxTotal = data.taxTotal
+    var finalTotal = data.finalTotal;
+    console.log('var created.. building doc..\n');
     cleanOrder.push (
         name
     )
@@ -19,7 +28,7 @@ function parseObject ( data ){
         '\n'
     )
     cleanOrder.push (
-        date
+        dateWT
     )
     cleanOrder.push (
         '\n'
@@ -37,8 +46,22 @@ function parseObject ( data ){
         '\n'
     )
     cleanOrder.push (
-        'Driver : ' + driver
+        'Customer Street: ' + custStreet
     )
+    cleanOrder.push (
+        '\n'
+    )
+    cleanOrder.push (
+        'Customer City: ' + custCity
+    )
+    cleanOrder.push (
+        '\n'
+    )
+    if (order.dilverReq) {
+        cleanOrder.push (
+            'Dilvery REQUIRED'
+        )
+    }
     cleanOrder.push (
         '\n'
     )
@@ -70,43 +93,43 @@ function parseObject ( data ){
             cleanOrder.push(
                 order[i]
             )
-            i++
+            // i+=15;
             cleanOrder.push(
                 '\n'
             )
         }
         if (order[i].includes('Order : Pizza')){
-            cleanOrder.push (
+            cleanOrder.push ( // order
                 order[i]
             )
             i++
-            cleanOrder.push (
+            cleanOrder.push ( // quantity
                 order[i]
             )
-            i+=3;
-            cleanOrder.push (
-                order[i]
-            )
-            i++
-            cleanOrder.push (
-                order[i]
-            )
-            cleanOrder.push (
-                'TOPPINGS\n'
-            )
-            i++
-            cleanOrder.push(
+            i+=3; // skip extra, skip details
+            cleanOrder.push ( // size
                 order[i]
             )
             i++
-            cleanOrder.push(
+            cleanOrder.push ( //crust
                 order[i]
+            )
+            cleanOrder.push ( // display toppings
+                ' ---------- TOPPINGS  ---------- \n'
             )
             i++
-            cleanOrder.push(
+            cleanOrder.push( // display toppings
                 order[i]
             )
-            i++ 
+            i+=3
+            // cleanOrder.push(
+            //     order[i]
+            // )
+            // i++
+            // cleanOrder.push(
+            //     order[i]
+            // )
+            // i++ 
             cleanOrder.push(
                 order[i]
             )
@@ -115,14 +138,14 @@ function parseObject ( data ){
             )
         }
         if (order[i].includes('Order : Sub') || order[i].includes('Order : Panzerotti')) {
-            cleanOrder.push (
+            cleanOrder.push (   // order type
                 order[i]
             )
             i++
-            cleanOrder.push (
+            cleanOrder.push ( // quantity
                 order[i]
             )
-            i+=5;
+            i+=4; // skip crust and size
             cleanOrder.push (
                 ' ---------- TOPPINGS  ---------- \n'
             )
@@ -141,12 +164,15 @@ function parseObject ( data ){
             cleanOrder.push(
                 order[i]
             )
+            // i+=8;
             cleanOrder.push(
                 '\n'
             )
 
         }
+        
         if (order[i].includes('Order : Split Pizza')) {
+            console.log('check point 3: ' + cleanOrder);
             cleanOrder.push (
                 order[i]
             )
@@ -165,7 +191,7 @@ function parseObject ( data ){
             cleanOrder.push (
                 ' ---------- toppings LEFT SIDE  ---------- \n'
             )
-            i+=5;
+            // i+=5;
             cleanOrder.push(
                 order[i]
             )
@@ -201,13 +227,24 @@ function parseObject ( data ){
             cleanOrder.push (
                 order[i]
             )
+            i++ 
             cleanOrder.push(
                 '\n'
             )
         }
     }
-    // cleanOrder.join("");
+    cleanOrder.push (
+        'Total: ' + total + '\n'
+    )
+    cleanOrder.push (
+        'Tax Total: ' + taxTotal + '\n'
+    )
+    cleanOrder.push( 
+        'Final : ' + finalTotal + '\n'
+    )
+    console.log('final stop \n' + cleanOrder);
     var finalOrder = cleanOrder.join('');
+    console.log('logging order');
     console.log(finalOrder);
     fs.writeFile('./public/'+ data.name + '_' + data.tagDate + '.txt',
     // data.name + '\n' + data.date + '\n' + data.custName + '\n' + data.custPhone + '\n' + data.order

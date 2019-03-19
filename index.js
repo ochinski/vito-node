@@ -36,10 +36,6 @@ app.use('/api',users);
 app.use('/api',orders);
 app.use('/api',customers);
 
-// app.get('/', function(req, res) {
-//     res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
-
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
