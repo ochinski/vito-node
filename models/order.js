@@ -14,6 +14,10 @@ const orderScheme = new Schema({
     driver : {type : String },
     driverReq : {type : Boolean},
     isPrinted : {type : Boolean},
+    deliveryCost : {type : String},
+    total : {type : String},
+    taxTotal : {type : String},
+    finalTotal : {type : String}
 });
 
 const Order = mongoose.model('order',orderScheme);

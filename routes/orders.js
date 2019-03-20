@@ -5,6 +5,7 @@ const spawn = require('child_process').spawn;
 const fs = require('fs');
 
 const parseObject = require('./scripts/parseObject');
+const parseObjectDriver = require('./scripts/parseObjectDriver');
 
 const bodyParser = require('body-parser');
 
@@ -12,6 +13,7 @@ const path = require('path');
 const scriptFilename = path.join(__dirname, 'scripts', 'test.py');
 
 const parse = require("./scripts/parseObject.js");
+const parseDriver = require("./scripts/parseObjectDriver.js");
 
 const mongoose = require('mongoose');
 
@@ -93,7 +95,7 @@ router.post('/orders_drivers', function (req, res, next) {
             driver:req.body.driver, driverReq:false
         }
         }, 
-        { new: true }, // If you want to return updated order
+        // { new: true }, // If you want to return updated order
         function (err, updatedOrder) { 
         if (err) throw err;
         console.log('UPDATE new driver', updatedOrder);
@@ -110,21 +112,40 @@ router.get('/orders_drivers/print', function (req, res, next) {
 
 /* updated printed Driver */
 router.post('/orders_drivers/print', function (req, res, next) {
-    console.log(req.body);
-    Order.update({
-        _id: mongoose.Types.ObjectId(req.body.id)
-        },
-        {
+    Order.updateMany({
+        isPrinted: false,driverReq:false
+    }, 
+    {
         $set: {
-            isPrinted:true,
+            isPrinted: true
         }
-        }, 
-        { new: true }, // If you want to return updated order
+        },
         function (err, updatedOrder) { 
-        if (err) throw err;
-        console.log('UPDATE new driver', updatedOrder);
-    })
+            if (err) throw err;
+            // console.log('UPDATE order to PRINTED -- TRUE', updatedOrder);
+        })
+        
 }); 
+router.post ('/orders_drivers/printRecord',function(req,res,next) {
+    console.log('we printer printRecord');
+    parseDriver.parseObjectDriver(req.body);
+})
+    // req.body.forEach( order => {
+    //     console.log(order)
+    //     console.log(order.id)
+    //     Order.update({
+    //         _id: mongoose.Types.ObjectId(order)
+    //     },
+    //     {
+    //         $set: {
+    //             isPrinted:true,
+    //     }
+    //     }, 
+    //     // { new: true }, // If you want to return updated order
+    //     function (err, updatedOrder) { 
+    //         if (err) throw err;
+    //     console.log('Updated Driver Record - - PRINTED', updatedOrder);
+    //     })
 
 /* GET all customer order's */
 router.get('/orders/:name/:phone/:page', function (req, res, next) {
