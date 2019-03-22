@@ -1,7 +1,8 @@
 # Backend to the Pizza Mangment System
 Buinsess POS backend using express and mongoDB backend
 
-NOTE: NO SECURITY FEATURES IN PLACE
+NOTE: NO SECURITY FEATURES IN PLACE, 
+ --- prototyping version before cleaned up and put into production  ---
 
 # Key Features
 - REST api for customer's, users and order's from the POS system
